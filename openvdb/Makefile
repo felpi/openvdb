@@ -81,6 +81,8 @@
 #
 
 # The directory into which to install libraries, executables and header files
+HDSO=/usr/lib
+HT=/usr
 DESTDIR := /tmp/OpenVDB
 
 # The parent directory of the boost/ header directory
@@ -91,9 +93,9 @@ BOOST_LIB := -lboost_iostreams -lboost_system
 BOOST_THREAD_LIB := -lboost_thread
 
 # The parent directory of the OpenEXR/ header directory
-EXR_INCL_DIR := $(HT)/include
+EXR_INCL_DIR := $(HT)/local/include
 # The directory containing IlmImf
-EXR_LIB_DIR := $(HDSO)
+EXR_LIB_DIR := /usr/local/lib
 EXR_LIB := -lIlmImf
 
 # The parent directory of the OpenEXR/ header directory (which contains half.h)
@@ -140,9 +142,9 @@ LOG4CPLUS_LIB := -llog4cplus
 
 # The directory containing glfw.h
 # (leave blank if GLFW is unavailable)
-GLFW_INCL_DIR := /rel/third_party/glfw/glfw-3.0.1/include
+GLFW_INCL_DIR := /usr/local/include
 # The directory containing libglfw
-GLFW_LIB_DIR := /rel/third_party/glfw/glfw-3.0.1/lib
+GLFW_LIB_DIR := /usr/local/lib
 GLFW_LIB := -lglfw
 # The major version number of the GLFW library
 # (header filenames changed between GLFW 2 and 3, so this must be specified explicitly)
@@ -150,7 +152,7 @@ GLFW_MAJOR_VERSION := 3
 
 # The version of Python for which to build the OpenVDB module
 # (leave blank if Python is unavailable)
-PYTHON_VERSION := 2.6
+PYTHON_VERSION := 
 # The directory containing Python.h
 PYTHON_INCL_DIR := $(HFS)/python/include/python$(PYTHON_VERSION)
 # The directory containing pyconfig.h
@@ -518,7 +520,7 @@ LIBVIEWER_SRC_NAMES := \
 ifdef MBSD
     LIBVIEWER_FLAGS := -framework Cocoa -framework OpenGL -framework IOKit
 else
-    LIBVIEWER_FLAGS := -lGL -lGLU
+    LIBVIEWER_FLAGS := -lblosc -lGL -lGLU -ltbb $(LIBS) $(BOOST_LIB)
 endif
 
 
